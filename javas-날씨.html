@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body,html{
+            width: 100%;
+            height: 100%;
+            background: url("img/bg-3.jpg") no-repeat;
+            background-size: cover;
+        }
+        #box{
+            width: 45%;
+            height: 100%;
+            position: fixed;
+            background: black;
+        }
+        #cirbox{
+            border: 1px solid black;
+            width: 660px;
+            height: 660px;
+            margin: 0 auto;
+            margin-top: 150px;
+        }
+        .cir p{
+            font-size: 33px;
+            font-weight: bold;
+        }
+        .cir p span{
+            font-size: 45px;
+        }
+        .excir{
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: conic-gradient(blue 0%, black 0%);
+            position: relative;
+            float: left;
+            margin: 40px;
+        }
+        .cir{
+            width: 210px;
+            height: 210px;
+            border-radius: 50%;
+            background: white;
+            text-align: center;
+            line-height: 30px;
+            position: absolute;
+            left: 18px;
+            top: 20px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+        }
+        .cir img{
+            margin-top: 50px;
+        }
+    </style>
+    <script>
+        $(function(){
+            var wid = $("#box").width();
+            $("#box").css({"right":-wid});
+            
+            $("#box").animate({"right":"0"},700);
+            
+            var num1=0, num2=0, num3=0, num4=0;
+            
+            setTimeout(function(){    
+                setInterval(function(){
+                    if(num1<70){
+                        num1++;
+                        $("#cir1 p span").text(num1);
+                         $("#excir1").css({"background":"conic-gradient(blue 0% "+num1+"%, black "+num1+"%)"});
+                    }
+                },17);
+                
+                setInterval(function(){
+                    if(num2<40){
+                        num2++;
+                        $("#cir2 p span").text(num2);
+                         $("#excir2").css({"background":"conic-gradient(red 0% "+num2+"%, black "+num2+"%)"});
+                    }
+                },17);
+                
+                setInterval(function(){
+                    if(num3<50){
+                        num3++;
+                        $("#cir3 p span").text(num3);
+                         $("#excir3").css({"background":"conic-gradient(green 0% "+num3+"%, black "+num3+"%)"});
+                    }
+                },17);
+               
+                setInterval(function(){
+                    if(num4<80){
+                        num4++;
+                        $("#cir4 p span").text(num4);
+                         $("#excir4").css({"background":"conic-gradient(purple 0% "+num4+"%, black "+num4+"%)"});
+                    }
+                },17);
+            },1000);
+            
+        });
+    </script>
+</head>
+<body>
+    <div id="box">
+        <div id="cirbox">
+           <div class="excir" id="excir1">
+                <div class="cir" id="cir1">
+                   <img src="img/graphic-water.png" alt="">
+                    <p><span>0</span>%</p>
+                </div>
+            </div>
+            <div class="excir" id="excir2">
+                <div class="cir" id="cir2">
+                   <img src="img/graphic-sun.png" alt="">
+                    <p><span>0</span>%</p>
+                </div>
+            </div>
+            <div class="excir" id="excir3">
+                <div class="cir" id="cir3">
+                   <img src="img/graphic-woods.png" alt="">
+                    <p><span>0</span>%</p>
+                </div>
+            </div>
+            <div class="excir" id="excir4">
+                <div class="cir" id="cir4">
+                   <img src="img/graphic-bird.png" alt="">
+                    <p><span>0</span>%</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

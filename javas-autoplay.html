@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html class="no-js" lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Chapter 05-01 - jQuery 최고의 교과서</title>
+<!--<link rel="stylesheet" href="./css/normalize.css">-->
+<style>
+/*
+	.slideshow {
+    overflow: hidden;
+    position: relative;
+    min-width: 960px;
+    height: 465px;
+}
+.slideshow img {
+    display: none;
+    position: absolute;
+    left: 50%;
+    margin-left: -800px;
+}
+
+ JavsScript 비활성화 시 
+.no-js .slideshow img:first-child {
+    display: inline;
+    -------------------------------------------------------------------------------------
+*/
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    #wrap{
+        margin-top: 200px;
+/*        position: relative;*/
+        text-align: center;
+    }
+    button{
+        width: 50px;
+        height: 100px;
+        font-size: 60px;
+        background: rgba(0,0,0,0.5);
+        border: none;
+        position: absolute;
+        color: white;
+    }
+    #next{
+        top: 130px;
+        right:0;
+    }
+    #prev{
+        top: 130px;
+        left: 0;
+    }
+    p{
+        font-size: 20px;
+        display: inline-block;
+    }
+    #screen{
+        width: 600px;
+        height: 350px;
+        border: 10px solid rgba(0,0,50,0.1);
+        position: relative;
+        margin: 0 auto;
+        overflow: hidden;
+    }
+    #imgwrap img{
+        width: 600px;
+        height: 350px;
+        float: left;
+    }
+    #imgwrap{
+        width: 3600px;
+        height: 350px;
+        position: absolute;
+        left: -600px;
+    }
+}
+</style>
+<!--<script src="./js/vendor/modernizr.custom.min.js"></script>-->
+<!--<script src="./js/vendor/jquery-1.10.2.min.js"></script>-->
+<!--<script src="./js/main.js"></script>-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+//    $(function(){
+//        $(".slideshow").each(function(){
+//            
+//            var $slides = $(this).find("img"),
+//                slideCount = $slides.length, 
+//                currentIndex = 0;
+//            
+//            $slides.eq(currentIndex).fadeIn();
+//            
+//            setInterval(showNextSlide, 2000);
+//            
+//            function showNextSlide(){
+//                var nextIndex = (currentIndex + 1) % slideCount;
+//                
+//                $slides.eq(currentIndex).fadeOut();
+//                $slides.eq(nextIndex).fadeIn();
+//                
+//                currentIndex = nextIndex;
+//                
+//                
+//            }
+//        });
+//    });
+//    --------------------------------------------------------------------------
+    
+    $(function(){
+        
+        var num = 0;
+        var interval;
+        var len = $("#imgwrap").find("img").length;
+        var wid = $("img").width();
+        
+        console.log(wid);
+
+        $("#next").on("click", function(){
+            
+            num ++;
+            $("#imgwrap").animate({"left":"-="+wid+"px"});
+            if(num>(len-3)){
+                $("#imgwrap").animate({"left":"-"+wid+"px"},0);
+                num = 0;
+            }
+            console.log(num);
+        });
+        
+        $("#prev").on("click", function(){
+            
+            num --;
+            $("#imgwrap").animate({"left":"+="+wid+"px"});
+            if(num<0){
+                $("#imgwrap").animate({"left":"-"+(wid*(len-2))+"px"},0);
+                num = (len-3);
+            }
+            console.log(num);
+        
+        });
+        
+        
+        
+        function autoslide(){
+            interval = setInterval(function(){
+                num++;
+                $("#imgwrap").animate({"left":"-="+wid+"px"});
+                if(num>(len-3)){
+                    $("#imgwrap").animate({"left":"-"+wid+"px"},0);
+                    num = 0;
+                }
+            },2000);
+           
+        }
+       
+        $("#auto").change(function(){
+            
+            if($(this).is(':checked')){
+                autoslide();
+            }
+            else{
+                clearInterval(interval);
+            }
+        });
+        
+        
+             
+    });
+</script>
+</head>
+<body>
+
+<!--
+<header class="hero-header">
+    <div class="inner">
+        <div class="slideshow">
+            <img src="img/slide-1.jpg" alt="" width="1600" height="465">
+            <img src="img/slide-2.jpg" alt="" width="1600" height="465">
+            <img src="img/slide-3.jpg" alt="" width="1600" height="465">
+            <img src="img/slide-4.jpg" alt="" width="1600" height="465">
+        </div>
+    </div>
+</header>
+-->
+<!------------------------------------------------------------------------------------------->
+<div id="wrap">
+    <div id="screen">
+        <div id="imgwrap">
+           <img src="img/slide-4.jpg" alt="">
+            <img src="img/slide-1.jpg" alt="">
+            <img src="img/slide-2.jpg" alt="">
+            <img src="img/slide-3.jpg" alt="">
+            <img src="img/slide-4.jpg" alt="">
+            <img src="img/slide-1.jpg" alt="">
+        </div>
+        
+        <button id="prev"><</button>
+    <button id="next">></button>
+    </div>
+    
+    <br><input type="checkbox" id="auto"> <p>Autoplay Slider</p>
+</div>
+</body>
+</html>

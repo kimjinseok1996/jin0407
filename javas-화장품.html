@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            padding: 150px;
+            background: #eaeaea;
+        }
+        #wrap{
+            width: 100%;
+            height: 810px;
+        }
+        #screen{
+            width:1540px;
+            height: 810px;
+            margin: 0 auto;
+            background: #eaeaea;
+            position: relative;
+            overflow: hidden;
+        }
+        button{
+            width: 90px;
+            height: 180px;
+            color: white;
+            position: absolute;
+            z-index: 101;
+            border: none;
+        }
+        #next{
+            right: 50px;
+            top: 300px;
+            background: url(images/main_visual_right.png) no-repeat;
+            background-size: cover;
+        }
+        #prev{
+            left: 50px;
+            top: 300px;
+            background: url(images/main_visual_left.png) no-repeat;
+            background-size: cover;
+        }
+        #textwrap{
+            width: 551px;
+            height: 549px;
+            position: absolute;
+            left: -551px;
+        }
+        #textwrap img{
+            width: 551px;
+            height: 549px;
+            position: absolute;
+            left: 0;
+            transition: 1s;
+            transition-delay: 0.3s;
+            z-index: 100;
+            opacity: 0;
+        }
+        #imgwrap{
+            width: 1540px;
+            height: 810px;
+            position: absolute;
+            left: 100px;
+        }
+        #imgwrap img{
+            width: 1540px;
+            height: 810px;
+            position: absolute;
+            left: 0;
+            transition: 1s;
+            z-index: 99;
+            opacity: 0;
+        }
+        #textwrap img.texton{
+            opacity: 1;
+            left: 551px;
+        }
+        #imgwrap img.imgon{
+            opacity: 1;
+            left: -100px;
+        }
+    </style>
+    <script>
+        $(function(){
+            
+            var num = 0;
+            
+            $("#textwrap img").eq(0).addClass("texton");
+             $("#imgwrap img").eq(0).addClass("imgon");
+            
+            setInterval(function(){
+                num++;
+               $("#imgwrap img").removeClass("imgon");
+                $("#imgwrap img").eq(num).addClass("imgon");
+                
+                $("#imgwrap img").removeClass("imgon");
+                $("#imgwrap img").eq(num).addClass("imgon");
+                
+                console.log(num);
+                if(num >= 3){
+                    num = -1;
+                }
+                
+            },18000);
+            
+            $("#next").on("click", function(){
+                num++; 
+                $("#imgwrap img").removeClass("imgon");
+                $("#imgwrap img").eq(num).addClass("imgon");
+                
+                $("#textwrap img").removeClass("texton");
+                $("#textwrap img").eq(num).addClass("texton");
+                console.log(num);
+                if(num >= 3){
+                    num = -1;
+                }   
+            });
+            
+            $("#prev").on("click", function(){
+                num--;
+                
+                $("#imgwrap img").removeClass("imgon");
+                $("#imgwrap img").eq(num).addClass("imgon");
+                
+                $("#textwrap img").removeClass("texton");
+                $("#textwrap img").eq(num).addClass("texton");
+                console.log(num);
+                if(num <= -1){
+                    num = 3;
+                }
+                
+                
+            });
+        });
+    </script>
+</head>
+<body>
+  <div id="wrap">
+   <div id="screen">
+        <div id="textwrap">
+            <img src="images/text1.png" alt="">
+            <img src="images/text2.png" alt="">
+            <img src="images/text3.png" alt="">
+            <img src="images/text4.png" alt="">
+        </div>
+        <div id="imgwrap">
+            <img src="images/visual1.jpg" alt="">
+            <img src="images/visual2.jpg" alt="">
+            <img src="images/visual3.jpg" alt="">
+            <img src="images/visual4.jpg" alt="">
+        </div>
+        <button id="next"></button>
+        <button id="prev"></button>
+    </div>
+</div>
+</body>
+</html>
